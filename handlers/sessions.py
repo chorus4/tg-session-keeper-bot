@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-from telethon.errors import SessionPasswordNeededError
+from telethon.errors import SessionPasswordNeededError, FloodWaitError
 
 import db
 from db.models.session import Session
@@ -80,8 +80,16 @@ async def phone_number_handler(message: Message, state: FSMContext):
     if user != None:
       await message.answer("Этот номер телефона уже существует⚠️")
 
-  phone_code = await client.send_code_request(message.text)
-  phone_code_hash = phone_code.phone_code_hash
+  try:
+    phone_code = await client.send_code_request(message.text)
+    phone_code_hash = phone_code.phone_code_hash
+  except FloodWaitError:
+    await message.answer("Произошла ошибка при отправке кода, повторите позже ♻️", reply_markup=get_menu_keyboard())
+    return
+  except Exception as e:
+    print(e)
+    await message.answer("Номер телефона некорректный ⚠️")
+    return
 
   await state.set_state(CreateSessionFSM.code_hash)
   await state.update_data(code_hash=phone_code_hash, number=message.text)
