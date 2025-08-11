@@ -33,7 +33,11 @@ pip install -r requirements.txt
 
 _Переименуйте файл .env.example на .env_
 
-Вместо `YOUR TOKEN` вставьте свой токен с [BotFather](https://t.me/BotFather)
+В `BOT_TOKEN` вставьте свой токен с [BotFather](https://t.me/BotFather)
+
+В `API_ID` вставьте API_ID который нужно создать в [Telegram API Portal](https://my.telegram.org/apps)
+
+В `API_HASH` вставьте API_HASH который нужно создать в [Telegram API Portal](https://my.telegram.org/apps)
 
 Также создайте в корне проекта папку `media`
 
