@@ -39,8 +39,6 @@ _Переименуйте файл .env.example на .env_
 
 В `API_HASH` вставьте API_HASH который нужно создать в [Telegram API Portal](https://my.telegram.org/apps)
 
-Также создайте в корне проекта папку `media`
-
 ---
 
 **Запуск**
